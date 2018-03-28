@@ -21,7 +21,7 @@ class _LoginPageState extends State<LoginPage> {
       return;
     }
     // 进入主页面
-    Navigator.of(context).pushNamed('/shopcart');
+    Navigator.of(context).pushNamed('/tab_controller');
   }
 
   // 弹框提示
@@ -59,8 +59,9 @@ class _LoginPageState extends State<LoginPage> {
                       maxLength: 11,
                       autofocus: true,
                       decoration: new InputDecoration(
-                        icon: new Icon(Icons.account_circle),
-                        hintText: 'Your account...'
+                        // icon: new Icon(Icons.account_circle),
+                        hintText: 'Your account...',
+                        labelText: 'Account'
                       ),
                     ),
                     new TextField(
@@ -69,8 +70,9 @@ class _LoginPageState extends State<LoginPage> {
                       maxLength: 20,
                       onSubmitted: (text) { _handleLogin(); },
                       decoration: new InputDecoration(
-                        icon: new Icon(Icons.lock_outline),
-                        hintText: 'Your passord...'
+                        // icon: new Icon(Icons.lock_outline),
+                        hintText: 'Your passord...',
+                        labelText: 'Password',
                       ),
                     )
                   ],

@@ -4,7 +4,8 @@ class ShopCartPage extends StatefulWidget {
   ShopCartPage({
     Key key,
     this.title = 'Flutter ShopCart Demo',
-  }) : super(key: key);
+  })
+      : super(key: key);
 
   final String title;
 
@@ -13,7 +14,6 @@ class ShopCartPage extends StatefulWidget {
 }
 
 class _ShopCartPageState extends State<ShopCartPage> {
-
   /// 删除商品
   void _decrement(var fruit) {
     setState(() {
@@ -22,7 +22,7 @@ class _ShopCartPageState extends State<ShopCartPage> {
         if (item['id'] == fruit['id'] && oldCount > 0) {
           item['count'] = --oldCount;
         }
-      }); 
+      });
     });
   }
 
@@ -31,7 +31,7 @@ class _ShopCartPageState extends State<ShopCartPage> {
     setState(() {
       data.forEach((item) {
         int quantity = num.parse(item['quantity'].toString());
-        int oldCount = num.parse(item['count'].toString()); 
+        int oldCount = num.parse(item['count'].toString());
         if (item['id'] == fruit['id'] && quantity > oldCount) {
           item['count'] = ++oldCount;
         }
@@ -44,7 +44,7 @@ class _ShopCartPageState extends State<ShopCartPage> {
     var flag = false;
     data.forEach((item) {
       int quantity = num.parse(item['quantity'].toString());
-      int oldCount = num.parse(item['count'].toString()); 
+      int oldCount = num.parse(item['count'].toString());
       if (item['id'] == fruit['id'] && quantity == oldCount) {
         flag = true;
         return;
@@ -57,7 +57,7 @@ class _ShopCartPageState extends State<ShopCartPage> {
   bool _hasNoCount(Map fruit) {
     var flag = false;
     data.forEach((item) {
-      int oldCount = num.parse(item['count'].toString()); 
+      int oldCount = num.parse(item['count'].toString());
       if (item['id'] == fruit['id'] && oldCount == 0) {
         flag = true;
         return;
@@ -70,7 +70,8 @@ class _ShopCartPageState extends State<ShopCartPage> {
   num _totalPrice() {
     var total = 0;
     data.forEach((item) {
-      total += num.parse(item['count'].toString()) * num.parse(item['price'].toString());
+      total += num.parse(item['count'].toString()) *
+          num.parse(item['price'].toString());
     });
     return total;
   }
@@ -114,7 +115,8 @@ class _ShopCartPageState extends State<ShopCartPage> {
   Widget _buildOperateButton(String title, Function callback, bool disabled) {
     return new FlatButton(
       child: new Container(
-        child: new Text(title, style: new TextStyle(color: disabled ? Colors.grey : Colors.black)),
+        child: new Text(title,
+            style: new TextStyle(color: disabled ? Colors.grey : Colors.black)),
         padding: const EdgeInsets.fromLTRB(8.0, 4.0, 8.0, 4.0),
         decoration: new BoxDecoration(
           border: new Border.all(width: 0.2, color: Colors.grey),
@@ -137,10 +139,8 @@ class _ShopCartPageState extends State<ShopCartPage> {
           padding: new EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 0.0),
           height: 60.0,
           decoration: const BoxDecoration(
-            border: const Border(
-              bottom: const BorderSide(width: 0.1, color: Colors.grey)
-            )
-          ),
+              border: const Border(
+                  bottom: const BorderSide(width: 0.1, color: Colors.grey))),
           child: new Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
@@ -160,10 +160,8 @@ class _ShopCartPageState extends State<ShopCartPage> {
                     children: <Widget>[
                       new Text(
                         '价格：￥' + fruit['price'].toString(),
-                        style: new TextStyle(
-                          fontSize: 13.0,
-                          color: Colors.grey
-                        ),
+                        style:
+                            new TextStyle(fontSize: 13.0, color: Colors.grey),
                       ),
                       new Container(
                         margin: const EdgeInsets.only(left: 8.0),
@@ -181,14 +179,18 @@ class _ShopCartPageState extends State<ShopCartPage> {
               ),
               new Row(
                 children: <Widget>[
-                  _buildOperateButton('-', () { _decrement(fruit); }, _hasNoCount(fruit)),
+                  _buildOperateButton('-', () {
+                    _decrement(fruit);
+                  }, _hasNoCount(fruit)),
                   new Text(fruit['count'].toString()),
-                  _buildOperateButton('+', () { _increment(fruit); }, _hasNoQuantity(fruit)),
+                  _buildOperateButton('+', () {
+                    _increment(fruit);
+                  }, _hasNoQuantity(fruit)),
                 ],
               )
             ],
           ),
-        ); 
+        );
       },
     );
   }
@@ -203,10 +205,8 @@ class _ShopCartPageState extends State<ShopCartPage> {
         height: 50.0,
         padding: const EdgeInsets.only(left: 16.0, right: 16.0),
         decoration: const BoxDecoration(
-          border: const Border(
-            top: const BorderSide(width: 0.5, color: Colors.grey)
-          )
-        ),
+            border: const Border(
+                top: const BorderSide(width: 0.5, color: Colors.grey))),
         child: new Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
@@ -215,21 +215,21 @@ class _ShopCartPageState extends State<ShopCartPage> {
               children: <Widget>[
                 new Text(
                   '总价：',
-                  style: new TextStyle(fontSize: 14.0, fontWeight: FontWeight.bold),
+                  style: new TextStyle(
+                      fontSize: 14.0, fontWeight: FontWeight.bold),
                 ),
-                new Text(
-                  "￥${_totalPrice()}",
-                  style: new TextStyle(fontSize: 18.0, color: Colors.red)
-                ),
+                new Text("￥${_totalPrice()}",
+                    style: new TextStyle(fontSize: 18.0, color: Colors.red)),
               ],
             ),
             new FlatButton(
               color: Colors.red,
               disabledColor: Colors.grey,
-              child: new Text(
-                '全选',
-                style: new TextStyle(color: _isSelectedAll() ? const Color(0xffdddddd) : Colors.white)
-              ),
+              child: new Text('全选',
+                  style: new TextStyle(
+                      color: _isSelectedAll()
+                          ? const Color(0xffdddddd)
+                          : Colors.white)),
               onPressed: _isSelectedAll() ? null : _handleSelectAll,
             )
           ],
@@ -237,7 +237,7 @@ class _ShopCartPageState extends State<ShopCartPage> {
       ),
     );
   }
- 
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -245,13 +245,12 @@ class _ShopCartPageState extends State<ShopCartPage> {
         title: new Text(widget.title),
       ),
       body: new Center(
-        child: new Stack(
-          children: <Widget>[
-            _buildShopCartList(),
-            _buildBottomBar(),
-          ],
-        )
-      ),
+          child: new Stack(
+        children: <Widget>[
+          _buildShopCartList(),
+          _buildBottomBar(),
+        ],
+      )),
     );
   }
 }

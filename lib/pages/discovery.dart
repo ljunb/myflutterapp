@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'dart:convert';
+import 'dart:async';
 
 class DiscoveryPage extends StatefulWidget {
   @override
@@ -13,11 +14,13 @@ class _DiscoveryPageState extends State<DiscoveryPage> {
   final url = 'http://food.boohee.com/fb/v1/categories/list';
   final httpClient = new HttpClient();
   var foodGroup = new List();
+  static const TIMEOUT = const Duration(seconds: 2);
 
   @override
   void initState() {
     super.initState();
-    _fetchData();
+    // 模拟延时两秒
+    new Timer(TIMEOUT, _fetchData);
   }
 
   void _fetchData() async {
@@ -82,7 +85,7 @@ class _DiscoveryPageState extends State<DiscoveryPage> {
 
     return new Scaffold(
       body: new Center(
-        child: new ListView.builder(
+        child: foodGroup.length == 0 ? new CircularProgressIndicator() : new ListView.builder(
           itemCount: foodGroup.length,
           itemBuilder: (context, int index) {
             var group = foodGroup[index];

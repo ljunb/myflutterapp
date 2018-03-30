@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../components/OperateButton.dart';
 
 class ShopCartPage extends StatefulWidget {
   ShopCartPage({
@@ -177,16 +178,12 @@ class _ShopCartPageState extends State<ShopCartPage> {
                   )
                 ],
               ),
-              new Row(
-                children: <Widget>[
-                  _buildOperateButton('-', () {
-                    _decrement(fruit);
-                  }, _hasNoCount(fruit)),
-                  new Text(fruit['count'].toString()),
-                  _buildOperateButton('+', () {
-                    _increment(fruit);
-                  }, _hasNoQuantity(fruit)),
-                ],
+              new OperateButton(
+                count: fruit['count'],
+                decreaseDisabled: _hasNoCount(fruit),
+                increaseDisabled: _hasNoQuantity(fruit),
+                onDecrease: (){ _decrement(fruit); },
+                onIncrease: (){ _increment(fruit); },
               )
             ],
           ),
@@ -241,9 +238,6 @@ class _ShopCartPageState extends State<ShopCartPage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: new AppBar(
-        title: new Text(widget.title),
-      ),
       body: new Center(
           child: new Stack(
         children: <Widget>[

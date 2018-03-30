@@ -10,16 +10,27 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final TextEditingController _accountController = new TextEditingController();
   final TextEditingController _passwordController = new TextEditingController();
+  var accountErrMsg, passwordErrMsg;
 
   void _handleLogin() {
     // 做个简单的校验
     if (_accountController.text.length != 11) {
-      _showDialog("Your account's length must be 11!");
+      setState(() {
+        accountErrMsg = "Account.length == 11";
+        passwordErrMsg = null;
+      });
       return;
     } else if (_passwordController.text.length < 6 || _passwordController.text.length > 20) {
-      _showDialog("Your password's length must more than 6 and less than 20!");
+      setState(() {
+        accountErrMsg = null;
+        passwordErrMsg = "Password.length >= 6 && Password.length <= 20";
+      });
       return;
     }
+    setState(() {
+      accountErrMsg = null;
+      passwordErrMsg = null;
+    });
     // 进入主页面
     Navigator.of(context).pushNamed('/tab_controller');
   }
@@ -61,7 +72,8 @@ class _LoginPageState extends State<LoginPage> {
                       decoration: new InputDecoration(
                         // icon: new Icon(Icons.account_circle),
                         hintText: 'Your account...',
-                        labelText: 'Account'
+                        labelText: 'Account',
+                        errorText: accountErrMsg
                       ),
                     ),
                     new TextField(
@@ -73,6 +85,7 @@ class _LoginPageState extends State<LoginPage> {
                         // icon: new Icon(Icons.lock_outline),
                         hintText: 'Your passord...',
                         labelText: 'Password',
+                        errorText: passwordErrMsg,
                       ),
                     )
                   ],

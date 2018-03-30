@@ -26,13 +26,13 @@ class _TabControllerPageState extends State<TabControllerPage> with SingleTicker
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      bottomNavigationBar: new Material(
-        color: Colors.blue,
-        child: new TabBar(
+      appBar: new AppBar(
+        backgroundColor: Colors.orangeAccent,
+        title: new TabBar(
           tabs: <Tab>[
-            new Tab(icon: new Icon(Icons.home)),
-            new Tab(icon: new Icon(Icons.local_activity)),
-            new Tab(icon: new Icon(Icons.people))
+            new Tab(text: 'Home'),
+            new Tab(text: 'Discovery'),
+            new Tab(text: 'Mine')
           ],
           controller: _controller,
         ),
